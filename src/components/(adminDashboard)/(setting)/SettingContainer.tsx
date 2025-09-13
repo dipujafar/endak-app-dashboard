@@ -10,6 +10,10 @@ const links = [
     path: "personal-information",
   },
   {
+    lable: "Set Media Limitation",
+    path: "set-media-limitation",
+  },
+  {
     lable: "Change Password",
     path: "changePassword",
   },

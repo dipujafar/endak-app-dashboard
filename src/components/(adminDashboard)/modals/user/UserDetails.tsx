@@ -18,7 +18,7 @@ const UserDetails = ({ open, setOpen, userType }: TPropsType) => {
       style={{
         minWidth: "max-content",
         position: "relative",
-        backgroundColor: "#000",
+        
       }}
     >
       <div className="pb-5">

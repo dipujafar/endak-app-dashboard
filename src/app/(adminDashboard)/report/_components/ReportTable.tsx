@@ -1,11 +1,9 @@
-"use client";
-import { message, Popconfirm, PopconfirmProps, TableProps } from "antd";
+"use client";;
+import { TableProps } from "antd";
 import { useState } from "react";
 import DataTable from "@/utils/DataTable";
-import { ArrowDownWideNarrowIcon, Eye } from "lucide-react";
-import UserDetails from "@/components/(adminDashboard)/modals/user/UserDetails";
-import { cn } from "@/lib/utils";
-import { CgUnblock } from "react-icons/cg";
+import { Eye } from "lucide-react";
+import ReportDetailsModal from "@/components/(adminDashboard)/modals/report/ReportDetailsModal";
 
 type TDataType = {
   key?: number;
@@ -15,6 +13,7 @@ type TDataType = {
   date: string;
   reportedBy: string;
   reason: string;
+  reportedEmail: string;
   comments: string;
 };
 
@@ -26,18 +25,12 @@ const data: TDataType[] = Array.from({ length: 5 }).map((data, inx) => ({
   reason: "No longer wants to communicate",
   comments: "Commitments were made but not fulfilled as per agreement.",
   email: "khalidendak@gmail.com",
-
+  reportedEmail: "medediislam@gmail.com",
   date: "11 Sep, 2025",
 }));
 
-const confirmBlock: PopconfirmProps["onConfirm"] = (e) => {
-  console.log(e);
-  message.success("Blocked the user");
-};
-
 const ReportTable = () => {
   const [open, setOpen] = useState(false);
-  const [userType, setUserType] = useState("User");
 
   const columns: TableProps<TDataType>["columns"] = [
     {
@@ -50,13 +43,18 @@ const ReportTable = () => {
       dataIndex: "name",
     },
     {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
       title: "Reported To",
       dataIndex: "reportedBy",
     },
     {
       title: "Email",
-      dataIndex: "email",
+      dataIndex: "reportedEmail",
     },
+
     {
       title: "Report for reason",
       dataIndex: "reason",
@@ -94,11 +92,7 @@ const ReportTable = () => {
         Reporting List
       </h1>
       <DataTable columns={columns} data={data}></DataTable>
-      <UserDetails
-        open={open}
-        setOpen={setOpen}
-        userType={userType}
-      ></UserDetails>
+      <ReportDetailsModal open={open} setOpen={setOpen}></ReportDetailsModal>
     </div>
   );
 };

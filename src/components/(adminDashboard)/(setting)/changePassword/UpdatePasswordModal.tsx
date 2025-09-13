@@ -47,64 +47,50 @@ const UpdatePasswordModal = ({ open, setOpen }: TPropsType) => {
           </div>
 
           {/* form */}
-          <ConfigProvider
-            theme={{
-              components: {
-                Input: {
-                  colorBgContainer: "var(--color-primary-gray)",
-                  colorText: "#fff",
-                  colorTextPlaceholder: "#fff",
-                },
-                Form: {
-                  labelColor: "#fff",
-                },
-              },
+
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            layout="vertical"
+            style={{
+              maxWidth: 500,
+              marginTop: "25px",
             }}
           >
-            <Form
-              form={form}
-              onFinish={handleSubmit}
-              layout="vertical"
-              style={{
-                maxWidth: 500,
-                marginTop: "25px",
-              }}
+            {/*  input  new Password*/}
+            <Form.Item
+              label="New password"
+              name="newPassword"
+              rules={[
+                { required: true, message: "Please Enter New  Password" },
+              ]}
             >
-              {/*  input  new Password*/}
-              <Form.Item
-                label="New password"
-                name="newPassword"
-                rules={[
-                  { required: true, message: "Please Enter New  Password" },
-                ]}
-              >
-                <Input.Password size="large" placeholder="Set new password" />
-              </Form.Item>
+              <Input.Password size="large" placeholder="Set new password" />
+            </Form.Item>
 
-              {/* input  confirm number  */}
-              <Form.Item
-                label="Re-enter new password"
-                name="confirmPassword"
-                rules={[
-                  { required: true, message: "Please Re-enter new password" },
-                ]}
-              >
-                <Input.Password
-                  size="large"
-                  placeholder="Re-enter new password"
-                />
-              </Form.Item>
-
-              <Button
-                htmlType="submit"
+            {/* input  confirm number  */}
+            <Form.Item
+              label="Re-enter new password"
+              name="confirmPassword"
+              rules={[
+                { required: true, message: "Please Re-enter new password" },
+              ]}
+            >
+              <Input.Password
                 size="large"
-                block
-                className="!border-none"
-              >
-                Update Password
-              </Button>
-            </Form>
-          </ConfigProvider>
+                placeholder="Re-enter new password"
+              />
+            </Form.Item>
+
+            <Button
+              htmlType="submit"
+              size="large"
+              block
+              className="!border-none"
+            >
+              Update Password
+            </Button>
+          </Form>
         </div>
       </Modal>
     </>

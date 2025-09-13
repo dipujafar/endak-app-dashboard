@@ -5,7 +5,16 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import avatarImg from "@/assets/image/profile.png";
 
 import Link from "next/link";
-import { X } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "../ui/menubar";
 
 type TNavbarProps = {
   collapsed: boolean;
@@ -21,7 +30,11 @@ const Navbar = ({ collapsed, setCollapsed }: TNavbarProps) => {
           onClick={() => setCollapsed(collapsed ? false : true)}
           className="cursor-pointer hover:bg-gray-300 rounded-full duration-1000"
         >
-         {collapsed ?  <X size={28} color="#3A3C3B" /> : <FaBars size={28} color="#3A3C3B" />}
+          {collapsed ? (
+            <X size={28} color="#3A3C3B" />
+          ) : (
+            <FaBars size={28} color="#3A3C3B" />
+          )}
         </button>
         <div className="flex flex-col ">
           <h2 className="md:text-2xl text-lg  font-medium text-[#3A3C3B]">
@@ -35,7 +48,7 @@ const Navbar = ({ collapsed, setCollapsed }: TNavbarProps) => {
       <Flex align="center" gap={20}>
         {/* Notification */}
         <Link href={"/notifications"}>
-          <div className="flex justify-center items-center size-12  rounded-full cursor-pointer relative border border-main-color">
+          <div className="flex justify-center items-center size-12  rounded-full cursor-pointer relative border border-main-color bg-[#ECEEF1]">
             <IoNotificationsOutline size={24} color="#545454" />
 
             <Badge
@@ -53,13 +66,37 @@ const Navbar = ({ collapsed, setCollapsed }: TNavbarProps) => {
           </div>
         </Link>
 
-        <Link href={"/personal-information"} className="flex items-center">
-          <Avatar
-            src={avatarImg.src}
-            size={48}
-            className="border border-main-color size-12"
-          ></Avatar>
-        </Link>
+        <Menubar className="py-6 rounded-full">
+          <MenubarMenu >
+            <MenubarTrigger className="shadow-none px-0 rounded-full py-2">
+              <div className="flex items-center gap-x-2  px-2 h-fit">
+                <p className="text-black">Khalid</p>
+                <Avatar
+                  src={avatarImg.src}
+                  size={40}
+                  className="size-12"
+                ></Avatar>
+              </div>
+            </MenubarTrigger>
+
+            <MenubarContent className="text-primary-gray">
+              <Link href={"/personal-information"}>
+                <MenubarItem className="hover:bg-gray-100 cursor-pointer">
+                  Profile{" "}
+                  <MenubarShortcut>
+                    <ChevronRight size={16} />
+                  </MenubarShortcut>
+                </MenubarItem>
+              </Link>
+              <MenubarSeparator />
+              <Link href={"/login"}>
+                <MenubarItem className="hover:bg-gray-100 cursor-pointer">
+                  Logout
+                </MenubarItem>
+              </Link>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
       </Flex>
     </div>
   );

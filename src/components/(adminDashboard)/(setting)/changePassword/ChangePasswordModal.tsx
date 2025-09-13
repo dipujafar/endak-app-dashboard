@@ -52,88 +52,69 @@ const ChangePasswordModal = ({ open, setOpen }: TPropsType) => {
           </div>
 
           {/* form */}
-          <ConfigProvider
-              theme={{
-                components: {
-                  Input: {
-                    colorBgContainer: "#fff",
-                    colorText: "#333",
-                    colorTextPlaceholder: "#fff",
-                  },
-                  Form: {
-                    labelColor: "#333",
-                  },
-                },
-              }}
+
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            layout="vertical"
+            style={{
+              maxWidth: 500,
+              marginTop: "25px",
+            }}
           >
-            <Form
-              form={form}
-              onFinish={handleSubmit}
-              layout="vertical"
-              style={{
-                maxWidth: 500,
-                marginTop: "25px",
-              }}
+            {/*  input old password */}
+            <Form.Item
+              label="Old Password"
+              name="oldPassword"
+              rules={[{ required: true, message: "Please Enter Old Password" }]}
             >
-              {/*  input old password */}
-              <Form.Item
-                label="Old Password"
-                name="oldPassword"
-                rules={[
-                  { required: true, message: "Please Enter Old Password" },
-                ]}
-              >
-                <Input.Password
-                  size="large"
-                  placeholder="Enter old password "
-                />
-              </Form.Item>
+              <Input.Password size="large" placeholder="Enter old password " />
+            </Form.Item>
 
-              {/*  input  new Password*/}
-              <Form.Item
-                label="New password"
-                name="newPassword"
-                rules={[
-                  { required: true, message: "Please Enter New  Password" },
-                ]}
-              >
-                <Input.Password size="large" placeholder="Set new password" />
-              </Form.Item>
+            {/*  input  new Password*/}
+            <Form.Item
+              label="New password"
+              name="newPassword"
+              rules={[
+                { required: true, message: "Please Enter New  Password" },
+              ]}
+            >
+              <Input.Password size="large" placeholder="Set new password" />
+            </Form.Item>
 
-              {/* input  confirm number  */}
-              <Form.Item
-                label="Re-enter new password"
-                name="confirmPassword"
-                rules={[
-                  { required: true, message: "Please Re-enter new password" },
-                ]}
-              >
-                <Input.Password
-                  size="large"
-                  placeholder="Re-enter new password"
-                />
-              </Form.Item>
-
-              <p
-                onClick={() => {
-                  setOpen(false);
-                  setOpenModal(true);
-                }}
-                className="mb-5 font-medium cursor-pointer text-gray-600"
-              >
-                Forget password?
-              </p>
-
-              <Button
-                htmlType="submit"
+            {/* input  confirm number  */}
+            <Form.Item
+              label="Re-enter new password"
+              name="confirmPassword"
+              rules={[
+                { required: true, message: "Please Re-enter new password" },
+              ]}
+            >
+              <Input.Password
                 size="large"
-                block
-                className="!border-none !py-6"
-              >
-                Update Password
-              </Button>
-            </Form>
-          </ConfigProvider>
+                placeholder="Re-enter new password"
+              />
+            </Form.Item>
+
+            <p
+              onClick={() => {
+                setOpen(false);
+                setOpenModal(true);
+              }}
+              className="mb-5 font-medium cursor-pointer text-gray-600"
+            >
+              Forget password?
+            </p>
+
+            <Button
+              htmlType="submit"
+              size="large"
+              block
+              className="!border-none !py-6"
+            >
+              Update Password
+            </Button>
+          </Form>
         </div>
       </Modal>
       {/* forget password Modal */}

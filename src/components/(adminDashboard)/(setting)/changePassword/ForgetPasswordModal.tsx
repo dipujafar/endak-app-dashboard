@@ -53,48 +53,34 @@ const ForgetPasswordModal = ({ open, setOpen }: TPropsType) => {
           </div>
 
           {/* form */}
-          <ConfigProvider
-            theme={{
-              components: {
-                Input: {
-                  colorBgContainer: "var(--color-primary-gray)",
-                  colorText: "#fff",
-                  colorTextPlaceholder: "#fff",
-                },
-                Form: {
-                  labelColor: "#fff",
-                },
-              },
+
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            layout="vertical"
+            style={{
+              maxWidth: 500,
+              marginTop: "25px",
             }}
           >
-            <Form
-              form={form}
-              onFinish={handleSubmit}
-              layout="vertical"
-              style={{
-                maxWidth: 500,
-                marginTop: "25px",
-              }}
+            {/*  input  email */}
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ type: "email", required: true }]}
             >
-              {/*  input  email */}
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[{ type: "email", required: true }]}
-              >
-                <Input size="large" placeholder="Enter Your Email "></Input>
-              </Form.Item>
+              <Input size="large" placeholder="Enter Your Email "></Input>
+            </Form.Item>
 
-              <Button
-                htmlType="submit"
-                size="large"
-                block
-                className="!border-none "
-              >
-                Send OTP
-              </Button>
-            </Form>
-          </ConfigProvider>
+            <Button
+              htmlType="submit"
+              size="large"
+              block
+              className="!border-none "
+            >
+              Send OTP
+            </Button>
+          </Form>
         </div>
       </Modal>
       <VerifyEmailModal
