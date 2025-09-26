@@ -18,44 +18,5 @@ export const formSchema = z.object({
 
 export type FormData = z.infer<typeof formSchema>;
 
-// utils functions
 
-export const handleDrag = (
-  e: React.DragEvent,
-  setDragActive: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  e.preventDefault();
-  e.stopPropagation();
-  if (e.type === "dragenter" || e.type === "dragover") {
-    setDragActive(true);
-  } else if (e.type === "dragleave") {
-    setDragActive(false);
-  }
-};
 
-export const handleDrop = (
-  e: React.DragEvent,
-  setDragActive: React.Dispatch<React.SetStateAction<boolean>>,
-  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>,
-  form: any
-) => {
-  e.preventDefault();
-  e.stopPropagation();
-  setDragActive(false);
-
-  if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-    const file = e.dataTransfer.files[0];
-    setSelectedFile(file);
-    form.setValue("bannerImage", file);
-    form.trigger("bannerImage");
-  }
-};
-
-export const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>, form: any) => {
-  if (e.target.files && e.target.files[0]) {
-    const file = e.target.files[0];
-    setSelectedFile(file);
-    form.setValue("bannerImage", file);
-    form.trigger("bannerImage");
-  }
-};
