@@ -64,8 +64,8 @@ const PrivacyPolicyEditor = () => {
           theme="snow"
           value={arabicValue}
           onChange={setArabicValue}
-          placeholder="Start writing for Arabic ......"
-          className="text-editor"
+          placeholder="Sابدأ بالكتابة......"
+          className="text-editor text-editor-arabic"
           style={{
             // border: "1px solid #EFE8FD",
             marginTop: "20px",
