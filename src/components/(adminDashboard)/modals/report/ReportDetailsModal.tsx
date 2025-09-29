@@ -72,7 +72,7 @@ const ReportDetailsModal = ({ open, setOpen }: TPropsType) => {
                 defaultValue={1}
                 options={[
                   { value: 1, label: "Resolved" },
-                  { value: 2, label: "Resolved" },
+                  { value: 2, label: "Block User" },
                 ]}
               />
             </div>

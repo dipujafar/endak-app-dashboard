@@ -2,10 +2,16 @@
 import { Input, message, Popconfirm, PopconfirmProps, TableProps } from "antd";
 import { useState } from "react";
 import DataTable from "@/utils/DataTable";
-import { Eye } from "lucide-react";
+import { ChevronDown, Eye } from "lucide-react";
 import UserDetails from "@/components/(adminDashboard)/modals/user/UserDetails";
 import { cn } from "@/lib/utils";
 import { CgUnblock } from "react-icons/cg";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 type TDataType = {
   key?: number;
@@ -106,6 +112,20 @@ const VendorTable = () => {
           >
             <CgUnblock size={22} color="#CD0335" />
           </Popconfirm>
+          {record.status === "Active" && (
+            <Popover>
+              <PopoverTrigger>
+                <ChevronDown size={22} color="var(--color-primary-gray)" />
+              </PopoverTrigger>
+              <PopoverContent className="w-max space-y-2">
+                <p>Make Subscribed </p>
+
+                <Button size={"sm"} className=" ml-auto block bg-main-color">
+                  Confirm
+                </Button>
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       ),
     },

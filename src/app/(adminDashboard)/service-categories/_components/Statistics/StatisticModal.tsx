@@ -1,7 +1,9 @@
-import { ClickIcon, EyeIcon } from "@/icon";
+import { ClickIcon, EyeIcon, MoneyIcon } from "@/icon";
 import { Modal } from "antd";
 import { RiCloseLargeLine } from "react-icons/ri";
-import AdsOverViewChart from "./AdsOverViewChart";
+import ClicksOverviewChart from "./ClicksOverviewChart";
+import EarningOverviewChart from "./EarningOverviewChart";
+import FilterBar from "./FilterBar";
 
 type TPropsType = {
   open: boolean;
@@ -10,18 +12,18 @@ type TPropsType = {
 
 const bannerStat = [
   {
-    title: "Total Views",
-    view: "3.5k",
-    icon: <EyeIcon />,
-  },
-  {
     title: "Total Clicks",
     view: "500",
     icon: <ClickIcon />,
   },
+  {
+    title: "Commission Earnings",
+    view: "$ 5000",
+    icon: <MoneyIcon />,
+  },
 ];
 
-const AdsBannerOverviewModal = ({ open, setOpen }: TPropsType) => {
+const StatisticModal = ({ open, setOpen }: TPropsType) => {
   return (
     <Modal
       open={open}
@@ -48,6 +50,9 @@ const AdsBannerOverviewModal = ({ open, setOpen }: TPropsType) => {
           </div>
         </div>
 
+        {/* -------------------- filter option------------ */}
+        <FilterBar />
+
         {/* ------------------------- display stat of the ads banner ----------------------- */}
         <div className="flex justify-between gap-5">
           {bannerStat.map((item, index) => (
@@ -68,11 +73,13 @@ const AdsBannerOverviewModal = ({ open, setOpen }: TPropsType) => {
           ))}
         </div>
 
-        {/*  --------------------------- display chart overview --------------------------- */}
-        <AdsOverViewChart className="mt-5" />
+        {/*  --------------------------- display clicks overview --------------------------- */}
+        <ClicksOverviewChart className="mt-5" />
+        {/*  --------------------------- display earnings overview --------------------------- */}
+        <EarningOverviewChart className="mt-5" />
       </div>
     </Modal>
   );
 };
 
-export default AdsBannerOverviewModal;
+export default StatisticModal;

@@ -72,6 +72,22 @@
   border-radius: 10px;
   overflow: auto !important;
 }
+.agreement-editor {
+  /* background-color: white; */
+  color: var(--color-text-color) !important;
+  height: 320px !important;
+  border: none !important;
+  border-radius: 10px;
+  overflow: auto !important;
+}
+.editor {
+  /* background-color: white; */
+  color: var(--color-text-color) !important;
+  height: 320px !important;
+  border: none !important;
+  border-radius: 10px;
+  overflow: auto !important;
+}
 
 /* ---------------------ant menu related style--------------------- */
 
@@ -87,10 +103,9 @@
   font-size: 16px;
 }
 
-.ant-menu-submenu-title  > svg {
+.ant-menu-submenu-title > svg {
   color: var(--color-primary-gray) !important;
 }
-
 
 .ant-menu-item-selected > svg {
   color: var(--color-menu-item) !important;
@@ -122,8 +137,6 @@
   padding: "40px";
   border-radius: "10px";
 }
-
-
 
 @layer base {
   :root {
@@ -180,8 +193,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {

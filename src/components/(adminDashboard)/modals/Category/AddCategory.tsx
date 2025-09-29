@@ -45,7 +45,7 @@ const AddCategory = ({ open, setOpen, title }: TPropsType) => {
               components: {
                 Input: {
                   colorText: "#000",
-                  colorTextPlaceholder: "#000",
+                  colorTextPlaceholder: "#808080",
                 },
                 Form: {
                   labelColor: "#var(--color-primary-gray)",
@@ -63,19 +63,29 @@ const AddCategory = ({ open, setOpen, title }: TPropsType) => {
                 marginTop: "25px",
               }}
             >
-              {/*  input  new Password*/}
+              {/*  input  service Name*/}
               <Form.Item
                 label="Service Name"
                 name="serviceName"
                 rules={[{ required: true, message: "Enter category name" }]}
               >
-                <Input.Password
+                <Input size="large" placeholder="Enter category name" />
+              </Form.Item>
+
+              {/*  input  service Name*/}
+              <Form.Item
+                label="Service Name (Arabic)"
+                name="serviceNameArabic"
+                rules={[{ required: true, message: "Enter category name" }]}
+              >
+                <Input
                   size="large"
-                  placeholder="Enter category name"
+                  placeholder="Enter category name for Arabic"
+                  dir="rtl"
                 />
               </Form.Item>
 
-              {/* input  confirm number  */}
+              {/* input  service Image  */}
               <Form.Item
                 label="Upload Service Image"
                 name="serviceImage"

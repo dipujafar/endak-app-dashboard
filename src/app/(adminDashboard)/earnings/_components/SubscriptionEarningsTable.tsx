@@ -1,6 +1,8 @@
-"use client";;
+"use client";
 import { Input, TableProps } from "antd";
 import DataTable from "@/utils/DataTable";
+import { ArrowDownWideNarrowIcon } from "lucide-react";
+import TopBarFilterOption from "./TopBarFilterOption";
 
 type TDataType = {
   key?: number;
@@ -24,9 +26,7 @@ const data: TDataType[] = Array.from({ length: 20 }).map((data, inx) => ({
   amount: "$475.00",
 }));
 
-
 const SubscriptionEarningsTable = () => {
-
   const columns: TableProps<TDataType>["columns"] = [
     {
       title: "Serial",
@@ -50,6 +50,25 @@ const SubscriptionEarningsTable = () => {
       title: "Subscription Type",
       dataIndex: "subscriptionType",
       align: "center",
+      filters: [
+        {
+          text: "Yearly",
+          value: "Yearly",
+        },
+        {
+          text: "Monthly",
+          value: "Monthly",
+        },
+      ],
+
+      filterIcon: () => (
+        <ArrowDownWideNarrowIcon
+          className="flex justify-start items-start"
+          color="#fff"
+        />
+      ),
+      onFilter: (value, record) =>
+        record.subscriptionType.indexOf(value as string) === 0,
     },
     {
       title: "Amount",
@@ -59,16 +78,14 @@ const SubscriptionEarningsTable = () => {
       title: " Purchase Date",
       dataIndex: "date",
     },
-
-    
   ];
 
   return (
-    <div className="bg-section-bg rounded-3xl">
-      <div className="max-w-[400px] ml-auto mb-2 pt-2">
-        <Input.Search placeholder="Search here..." size="large" />
+    <div className="space-y-3">
+      <TopBarFilterOption />
+      <div className="bg-section-bg rounded-3xl">
+        <DataTable columns={columns} data={data} pageSize={10}></DataTable>
       </div>
-      <DataTable columns={columns} data={data} pageSize={10}></DataTable>
     </div>
   );
 };

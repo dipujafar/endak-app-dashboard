@@ -37,19 +37,27 @@ const statData = [
   },
   {
     id: 5,
-    title: "Quest Users",
+    title: "Guest User",
     amount: "50",
     increase: true,
     days: "30",
     growth: "12%",
-  }
+  },
+  {
+    id: 5,
+    title: "Active User",
+    amount: "60",
+    increase: false,
+    days: "30",
+    growth: "12%",
+  },
 ];
 
 export default function StatContainer() {
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 xl:gap-5 gap-3">
       {statData?.map((item) => (
-        <div key={item.id} className={cn(item?.id === 5 && "xl:col-span-2" )}>
+        <div key={item.id}>
           <StatCard {...item} />
         </div>
       ))}

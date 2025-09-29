@@ -1,7 +1,9 @@
-"use client";;
+"use client";
 import { Input, TableProps } from "antd";
 import { useState } from "react";
 import DataTable from "@/utils/DataTable";
+import TopBarFilterOption from "./TopBarFilterOption";
+import { ArrowDownNarrowWide } from "lucide-react";
 
 type TDataType = {
   key?: number;
@@ -13,6 +15,7 @@ type TDataType = {
   subscriptionType: string;
   amount: string;
   commission: string;
+  commissionCategory: string;
 };
 
 const data: TDataType[] = Array.from({ length: 20 }).map((data, inx) => ({
@@ -25,6 +28,7 @@ const data: TDataType[] = Array.from({ length: 20 }).map((data, inx) => ({
   subscriptionType: inx % 2 === 0 ? "Yearly" : "Monthly",
   amount: "$270.00",
   commission: "1%",
+  commissionCategory: "Home Service",
 }));
 
 const CommissionEarningsTable = () => {
@@ -42,30 +46,67 @@ const CommissionEarningsTable = () => {
       title: "Email",
       dataIndex: "email",
     },
-     {
+    {
       title: "Transaction Price",
       dataIndex: "amount",
+    },
+    {
+      title: "Service Category",
+      dataIndex: "commissionCategory",
+      filters: [
+        {
+          text: "Home Service",
+          value: "Home Service",
+        },
+        {
+          text: "Medicine",
+          value: "Medicine",
+        },
+        {
+          text: "Professionals",
+          value: "Professionals",
+        },
+        {
+          text: "Administration",
+          value: "Administration",
+        },
+        {
+          text: "Transportation",
+          value: "Transportation",
+        },
+        {
+          text: "Construction",
+          value: "Construction",
+        },
+        {
+          text: "Sports",
+          value: "Sports",
+        },
+        {
+          text: "Food",
+          value: "Food",
+        },
+      ],
+      filterIcon: <ArrowDownNarrowWide color="#fff" />,
+      onFilter: (value, record) =>
+        record.commissionCategory.indexOf(value as string) === 0,
     },
     {
       title: "Commission",
       dataIndex: "commission",
       align: "center",
     },
-   
+
     {
       title: "Transaction Date",
       dataIndex: "date",
       align: "center",
     },
-
-    
   ];
 
   return (
-    <div className="bg-section-bg rounded-3xl">
-      <div className="max-w-[400px] ml-auto mb-2 pt-2">
-        <Input.Search placeholder="Search here..." size="large" />
-      </div>
+    <div className="bg-section-bg rounded-3xl space-y-3">
+      <TopBarFilterOption />
       <DataTable columns={columns} data={data} pageSize={10}></DataTable>
     </div>
   );

@@ -59,5 +59,34 @@ export const serviceCategories = [
     image: "/engineer-icon.png",
     iconColor: "text-blue-600",
   },
-
+  {
+    id: 11,
+    name: "Engineering",
+    image: "/engineer-icon.png",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: 12,
+    name: "Home Service",
+    image: "/home-icon.png",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: 13,
+    name: "Professionals",
+    image: "/professionals-icon.png",
+    iconColor: "text-green-600",
+  },
+  {
+    id: 14,
+    name: "Medicine",
+    image: "/medicine-icon.png",
+    iconColor: "text-green-600",
+  },
+  {
+    id: 15,
+    name: "Administration",
+    image: "/administration-icon.png",
+    iconColor: "text-green-600",
+  },
 ];

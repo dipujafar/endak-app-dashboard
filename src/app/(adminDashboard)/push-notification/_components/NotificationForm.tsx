@@ -1,5 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -20,11 +21,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  message: z.string().min(1, "Message is required"),
+  titleEn: z.string().min(1, "English title is required"),
+  titleAr: z.string().min(1, "Arabic title is required"),
+  messageEn: z.string().min(1, "English message is required"),
+  messageAr: z.string().min(1, "Arabic message is required"),
+
   targetAudience: z.string().min(1, "Please select a target audience"),
 });
 
@@ -44,15 +47,16 @@ export const NotificationForm = () => {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      message: "",
+      titleEn: "",
+      titleAr: "",
+      messageEn: "",
+      messageAr: "",
       targetAudience: "",
     },
   });
 
   const onSubmit = (data: FormData) => {
     console.log("Form submitted:", data);
-
     form.reset();
   };
 
@@ -67,45 +71,91 @@ export const NotificationForm = () => {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-foreground">
-                      Title
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter"
-                        className="bg-background border-border"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="titleEn"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-foreground">
+                        Title
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter English title"
+                          className="bg-background border-border"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium text-foreground">
-                      Message
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Enter"
-                        className="bg-background border-border resize-none min-h-[120px]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="titleAr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-foreground">
+                        Title (Arabic)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="أدخل العنوان بالعربية"
+                          className="bg-background border-border text-right"
+                          dir="rtl"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="messageEn"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-foreground">
+                        Message
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Enter English message"
+                          className="bg-background border-border resize-none min-h-[120px]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="messageAr"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-foreground">
+                        Message (Arabic)
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="أدخل الرسالة بالعربية"
+                          className="bg-background border-border resize-none min-h-[120px] text-right"
+                          dir="rtl"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}

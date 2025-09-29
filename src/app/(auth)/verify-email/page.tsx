@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import VerifyEmailForm from "@/components/(auth)/verifyEmail/VerifyForm";
+
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ const verifyEmail = () => {
               <p>Please enter the otp we have sent you in your email.</p>
             </div>
           </div>
-          <VerifyEmailForm></VerifyEmailForm>
+          {/* <VerifyEmailForm></VerifyEmailForm> */}
         </div>
       </div>
     </div>

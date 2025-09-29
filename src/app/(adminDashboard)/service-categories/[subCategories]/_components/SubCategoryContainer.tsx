@@ -9,6 +9,7 @@ import { useState } from "react";
 import CategoryCard from "../../_components/CategoryCard";
 import { serviceCategories } from "../../_components/utils.data";
 import AddCategory from "@/components/(adminDashboard)/modals/Category/AddCategory";
+import StatisticModal from "../../_components/Statistics/StatisticModal";
 
 const confirmBlock: PopconfirmProps["onConfirm"] = (e) => {
   console.log(e);
@@ -19,6 +20,7 @@ const confirmBlock: PopconfirmProps["onConfirm"] = (e) => {
 export default function SubCategoryContainer() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState<string>("");
+  const [openStateModal, setOpenStateModal] = useState(false);
   return (
     <>
       <div className="flex justify-between items-center flex-wrap xl:mb-6 mb-4 ">
@@ -56,27 +58,42 @@ export default function SubCategoryContainer() {
               <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
                 {serviceCategories?.map((category) => (
                   <CategoryCard key={category.id} category={category}>
-                    <div className="flex space-x-2">
-                      <Popconfirm
-                        title="Delete the category"
-                        description="Are you sure to delete this category?"
-                        onConfirm={confirmBlock}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Button
-                          variant="outline"
-                          className="text-xs px-3 py-1 h-6 border-main-color text-main-color flex-1"
-                          onClick={(e) => e.stopPropagation()}
+                    <div>
+                      <div className="flex space-x-2">
+                        <Popconfirm
+                          title="Delete the category"
+                          description="Are you sure to delete this category?"
+                          onConfirm={confirmBlock}
+                          okText="Yes"
+                          cancelText="No"
                         >
-                          Delete
+                          <Button
+                            variant="outline"
+                            className="text-xs px-3 py-1 h-6 border-main-color text-main-color flex-1"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Delete
+                          </Button>
+                        </Popconfirm>
+                        <Button
+                          onClick={() => {
+                            setOpen(true);
+                            setTitle("Edit Sub Category");
+                          }}
+                          className="text-xs px-3 py-1 h-6 bg-main-color hover:bg-main-color text-white w-[60px]"
+                        >
+                          Edit
                         </Button>
-                      </Popconfirm>
+                      </div>
                       <Button
-                        onClick={() => {setOpen(true); setTitle("Edit Sub Category")}}
-                        className="text-xs px-3 py-1 h-6 bg-main-color hover:bg-main-color text-white w-[60px]"
+                        variant="outline"
+                        className="text-xs px-3 py-1 h-6 border-main-color text-main-color flex-1 w-full mt-2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenStateModal(true);
+                        }}
                       >
-                        Edit
+                        View Statistics
                       </Button>
                     </div>
                   </CategoryCard>
@@ -86,7 +103,13 @@ export default function SubCategoryContainer() {
           </div>
         </div>
       </div>
-      <AddCategory open={open} setOpen={setOpen} title={ title || "Add Sub category"} />
+      <AddCategory
+        open={open}
+        setOpen={setOpen}
+        title={title || "Add Sub category"}
+      />
+
+      <StatisticModal open={openStateModal} setOpen={setOpenStateModal} />
     </>
   );
 }

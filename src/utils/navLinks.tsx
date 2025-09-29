@@ -8,6 +8,7 @@ import {
   Crown,
   MessageCircle,
   MessageSquareText,
+  NotebookPen,
   NotepadText,
   Podcast,
   TableCellsMerge,
@@ -60,6 +61,11 @@ export const navLinks = [
     label: <Link href={"/report"}>Report</Link>,
   },
   {
+    key: "agreement",
+    icon: <NotebookPen size={18} />,
+    label: <Link href={"/agreement"}>Agreement</Link>,
+  },
+  {
     key: "push-notification",
     icon: <Bell size={18} />,
     label: <Link href={"/push-notification"}>Push Notification</Link>,
@@ -69,7 +75,6 @@ export const navLinks = [
     icon: <MessageSquareText size={18} />,
     label: <Link href={"/message"}>Message</Link>,
   },
- 
 
   {
     key: "settings",

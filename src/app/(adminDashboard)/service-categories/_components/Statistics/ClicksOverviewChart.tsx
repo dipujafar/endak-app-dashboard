@@ -2,7 +2,7 @@
 import { CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { bannerStatData } from "./BannerData";
+import { clicksStatData } from "./data";
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -22,13 +22,13 @@ interface EarningsChartProps {
   className?: string;
 }
 
-const AdsOverViewChart = ({ className }: EarningsChartProps) => {
+const ClicksOverviewChart = ({ className }: EarningsChartProps) => {
   return (
     <div className={`p-6 bg-[#F9F9FA] border-none rounded-2xl  ${className}`}>
       <div className="flex justify-between items-center mb-5">
         <div className="flex-1">
           <CardTitle className="text-xl font-semibold flex items-center">
-            Total Views
+            Clicks Overview
           </CardTitle>
         </div>
       </div>
@@ -42,7 +42,7 @@ const AdsOverViewChart = ({ className }: EarningsChartProps) => {
         >
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              data={bannerStatData}
+              data={clicksStatData}
               margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
               className="h-[300px]"
             >
@@ -89,4 +89,4 @@ const AdsOverViewChart = ({ className }: EarningsChartProps) => {
   );
 };
 
-export default AdsOverViewChart;
+export default ClicksOverviewChart;
