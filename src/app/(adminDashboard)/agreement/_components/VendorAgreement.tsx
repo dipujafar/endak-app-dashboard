@@ -12,9 +12,7 @@ const CustomerAgreement = () => {
   const [value, setValue] = useState(
     "<h2>Lorem ipsum dolor sit amet consectetur. Fringilla a cras vitae orci. Egestas duis id nisl sed ante congue scelerisque. Eleifend facilisis aliquet tempus morbi leo sagittis. Pellentesque odio amet turpis habitant. Imperdiet tincidunt nisl consectetur hendrerit accumsan vehicula imperdiet mattis. Neque a vitae diam pharetra duis habitasse convallis luctus pulvinar. Pharetra nunc morbi elementum nisl magnis convallis arcu enim tortor.</h2><p><br/></p><p><br/></p><h2>Education also nurtures empathy and cultural awareness, fostering a more inclusive and understanding society. By learning about diverse perspectives and histories, we become more open-minded and respectful of differences, which is crucial in a world that is increasingly interconnected. This cultural competence not only enhances personal relationships but also strengthens international collaboration and peace.....</h2>"
   );
-  const [valueArabic, setValueArabic] = useState(
-    "<h2>Lorem ipsum dolor sit amet consectetur. Fringilla a cras vitae orci. Egestas duis id nisl sed ante congue scelerisque. Eleifend facilisis aliquet tempus morbi leo sagittis. Pellentesque odio amet turpis habitant. Imperdiet tincidunt nisl consectetur hendrerit accumsan vehicula imperdiet mattis. Neque a vitae diam pharetra duis habitasse convallis luctus pulvinar. Pharetra nunc morbi elementum nisl magnis convallis arcu enim tortor.</h2><p><br/></p><p><br/></p><h2>Education also nurtures empathy and cultural awareness, fostering a more inclusive and understanding society. By learning about diverse perspectives and histories, we become more open-minded and respectful of differences, which is crucial in a world that is increasingly interconnected. This cultural competence not only enhances personal relationships but also strengthens international collaboration and peace.....</h2>"
-  );
+  const [valueArabic, setValueArabic] = useState("");
 
   const toolbarOptions = [
     ["image"],
@@ -57,14 +55,15 @@ const CustomerAgreement = () => {
         <ReactQuill
           modules={moduleConest}
           theme="snow"
-          value={value}
+          value={valueArabic}
           onChange={setValueArabic}
-          className="agreement-editor"
-          placeholder="Start writing ......"
+          className="agreement-editor agreement-editor-arabic"
+          placeholder="ابدأ بالكتابة......"
           style={{
             border: "1px solid #EFE8FD",
             marginTop: "20px",
             borderRadius: "10px",
+            direction: "rtl",
           }}
         />
       </div>

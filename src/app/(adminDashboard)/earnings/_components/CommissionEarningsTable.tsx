@@ -1,9 +1,8 @@
 "use client";
-import { Input, TableProps } from "antd";
-import { useState } from "react";
+import { Dropdown, MenuProps, TableProps } from "antd";
+import { ArrowDownNarrowWide } from "lucide-react";
 import DataTable from "@/utils/DataTable";
 import TopBarFilterOption from "./TopBarFilterOption";
-import { ArrowDownNarrowWide } from "lucide-react";
 
 type TDataType = {
   key?: number;
@@ -16,9 +15,10 @@ type TDataType = {
   amount: string;
   commission: string;
   commissionCategory: string;
+  subCategory?: string;
 };
 
-const data: TDataType[] = Array.from({ length: 20 }).map((data, inx) => ({
+const data: TDataType[] = Array.from({ length: 20 }).map((_, inx) => ({
   key: inx,
   serial: inx + 1,
   name: "Mr. Khalid Endak",
@@ -29,7 +29,45 @@ const data: TDataType[] = Array.from({ length: 20 }).map((data, inx) => ({
   amount: "$270.00",
   commission: "1%",
   commissionCategory: "Home Service",
+  subCategory: inx % 2 === 0 ? "Cleaning" : "Plumbing",
 }));
+
+// Main categories with subcategories
+const categoryMenu: MenuProps["items"] = [
+  {
+    key: "home-service",
+    label: "Home Service",
+    children: [
+      { key: "home-service:cleaning", label: "Cleaning" },
+      { key: "home-service:plumbing", label: "Plumbing" },
+      { key: "home-service:ac-repair", label: "AC Repair" },
+    ],
+  },
+  {
+    key: "medicine",
+    label: "Medicine",
+    children: [
+      { key: "medicine:pharmacy", label: "Pharmacy" },
+      { key: "medicine:doctor", label: "Doctor Consultation" },
+    ],
+  },
+  {
+    key: "sports",
+    label: "Sports",
+    children: [
+      { key: "sports:coaching", label: "Coaching" },
+      { key: "sports:gym", label: "Gym Training" },
+    ],
+  },
+  {
+    key: "administration",
+    label: "Administration",
+    children: [
+      { key: "administration:coaching", label: "Coaching" },
+      { key: "administration:training", label: "Administration Training" },
+    ],
+  },
+];
 
 const CommissionEarningsTable = () => {
   const columns: TableProps<TDataType>["columns"] = [
@@ -53,50 +91,38 @@ const CommissionEarningsTable = () => {
     {
       title: "Service Category",
       dataIndex: "commissionCategory",
-      filters: [
-        {
-          text: "Home Service",
-          value: "Home Service",
-        },
-        {
-          text: "Medicine",
-          value: "Medicine",
-        },
-        {
-          text: "Professionals",
-          value: "Professionals",
-        },
-        {
-          text: "Administration",
-          value: "Administration",
-        },
-        {
-          text: "Transportation",
-          value: "Transportation",
-        },
-        {
-          text: "Construction",
-          value: "Construction",
-        },
-        {
-          text: "Sports",
-          value: "Sports",
-        },
-        {
-          text: "Food",
-          value: "Food",
-        },
-      ],
       filterIcon: <ArrowDownNarrowWide color="#fff" />,
-      onFilter: (value, record) =>
-        record.commissionCategory.indexOf(value as string) === 0,
+      filterDropdown: ({ setSelectedKeys, confirm }) => (
+        <Dropdown
+          menu={{
+            items: categoryMenu,
+            onClick: ({ key }) => {
+              setSelectedKeys([key]); // store clicked category/subcategory
+              confirm(); // trigger filtering
+            },
+          }}
+          open
+        />
+      ),
+      onFilter: (value, record) => {
+        const [category, sub] = (value as string).split(":");
+        if (sub) {
+          return (
+            record.commissionCategory.toLowerCase() ===
+              category.replace("-", " ") &&
+            record.subCategory?.toLowerCase() === sub
+          );
+        }
+        return record.commissionCategory
+          .toLowerCase()
+          .includes((value as string).replace("-", " "));
+      },
     },
     {
       title: "Commission",
       dataIndex: "commission",
       align: "center",
     },
-
     {
       title: "Transaction Date",
       dataIndex: "date",

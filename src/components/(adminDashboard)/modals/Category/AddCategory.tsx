@@ -78,11 +78,7 @@ const AddCategory = ({ open, setOpen, title }: TPropsType) => {
                 name="serviceNameArabic"
                 rules={[{ required: true, message: "Enter category name" }]}
               >
-                <Input
-                  size="large"
-                  placeholder="Enter category name for Arabic"
-                  dir="rtl"
-                />
+                <Input size="large" placeholder="أدخل اسم الفئة" dir="rtl" />
               </Form.Item>
 
               {/* input  service Image  */}
