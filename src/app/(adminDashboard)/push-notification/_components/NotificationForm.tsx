@@ -27,6 +27,7 @@ const formSchema = z.object({
   titleAr: z.string().min(1, "Arabic title is required"),
   messageEn: z.string().min(1, "English message is required"),
   messageAr: z.string().min(1, "Arabic message is required"),
+  link: z.string().optional(),
 
   targetAudience: z.string().min(1, "Please select a target audience"),
 });
@@ -156,6 +157,27 @@ export const NotificationForm = () => {
                   )}
                 />
               </div>
+
+              {/* ----------- link field ---------- */}
+               <FormField
+                  control={form.control}
+                  name="link"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-foreground">
+                        Link
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter link"
+                          className="bg-background border-border"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
               <FormField
                 control={form.control}

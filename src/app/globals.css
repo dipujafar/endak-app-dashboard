@@ -93,6 +93,10 @@
   direction: rtl;
   text-align: right;
 }
+.agreement-editor-arabic .ql-editor {
+  direction: rtl;
+  text-align: right;
+}
 
 /* ---------------------ant menu related style--------------------- */
 
